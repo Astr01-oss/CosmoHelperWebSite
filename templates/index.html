@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>CosmoHelper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}">
+
+<!--    fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!--    Montserrat Alternates-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login_form hidden" id="login-form">
+        <button class="exit_button" onclick="hide('login-form')">X</button>
+        <form action="/register" method="POST">
+            <h1>Register</h1>
+            <input type="text" placeholder="Логин" name="login" id="login">
+            <input type="password" placeholder="Пароль" name="password" id="password">
+            <button type="submit">Подтвердить</button>
+        </form>
+    </div>
+    </form>
+    <div class="mainmenu" id="startmenu">
+        <video autoplay muted loop class="selector" id="bg" src="{{ url_for('static', filename='images/0522.mp4')}}"></video>
+        <span id="main__menu__text">
+            <h1>CosmoHelper</h1>
+            <h2>твой космический гид в мире программирования!</h2>
+            <button onclick="startProgramm()">Начнем!</button>
+        </span>
+        <img src="{{ url_for('static', filename='images/cosmo.svg')}}" alt="" id="cosmo">
+    </div>
+    <div class="program hidden" id="program">
+        <header id="program_header" class="hidden">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/socmologo.svg')}}" alt="">
+                <h1>CosmoHelper</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="activelink" onclick="activePageHide(site)" id="website"><a>Сайт</a></li>
+                    <li class="" onclick="activePageHide(referat)" id="referat"><a>Реферат</a></li>
+                    <li class="" onclick="activePageHide(presentation)" id="presentation"><a>Презентация</a></li>
+                </ul>
+            </nav>
+            <a><img src="{{ url_for('static', filename='images/Iconly/Regular/Bold/Message.svg')}}" alt=""></a>
+            <a onclick="hide('login-form')"><img src="{{ url_for('static', filename='images/Iconly/Regular/Bold/Profile.svg')}}" alt=""></a>
+        </header>
+        <main id="program_main" class="hidden">
+            <div class="function hidden website" id="function">
+                <div class="card">
+                    <h2>Функционал</h2>
+                    <input type="number" class="input_text_card" placeholder="Кол-во страниц" id="page_count" onfocusout="checkLogicInput('page_count')">
+                    <details id="page_count_site">
+                        <summary onclick="arrowRotate('arrow1')"><p id="s1" class="summary_title">Кол-во страниц</p> <img src="{{ url_for('static', filename='images/Arrow - Down Circle.svg')}}" alt="" id="arrow1" class="active" onclick="arrowRotate('arrow1')"></summary>
+                        <span type="checkbox" id="s1_page1" onclick="selectAllowed(document.getElementById('s1_page1').textContent, 's1', 'pageCount_state', 'pageCount_price', '500')">Одностаринчый</span><br>
+                        <span type="checkbox" id="s1_page2" onclick="selectAllowed(document.getElementById('s1_page2').textContent, 's1', 'pageCount_state', 'pageCount_price', '3000')">Многостраничный</span>
+                    </details>
+                    <details>
+                        <summary onclick="arrowRotate('arrow2')"><p id="s2" class="summary_title">Фрейм-ворк</p> <img src="{{ url_for('static', filename='images/Arrow - Down Circle.svg')}}" alt="" id="arrow2" class="active" onclick="arrowRotate('arrow2')"></summary>
+                        <span type="checkbox" id="s2_soft1" onclick="selectAllowed(document.getElementById('s2_soft1').textContent, 's2', 'fwName_state', 'fwName_price', '0')">Нет</span><br>
+                        <span type="checkbox" id="s2_soft2" onclick="selectAllowed(document.getElementById('s2_soft2').textContent, 's2', 'fwName_state', 'fwName_price', '500')">Django</span><br>
+                        <span type="checkbox" id="s2_soft3" onclick="selectAllowed(document.getElementById('s2_soft3').textContent, 's2', 'fwName_state', 'fwName_price', '500')">Laravel</span><br>
+                        <span type="checkbox" id="s2_soft4" onclick="selectAllowed(document.getElementById('s2_soft4').textContent, 's2', 'fwName_state', 'fwName_price', '500')">Flask</span>
+                    </details>
+
+                    <span id="checkbox_block1" class="checkbox" onclick="checkBoxChecked('checkbox1'); checkBoxToggle(database, 'db_state', 'db_price', '500')"><p id="checkbox_title1" class="checkbox_title">База-данных</p><img src="{{ url_for('static', filename='images/Check-box-diactive.svg')}}" alt="" id="checkbox1" class=""></span>
+                    <span id="checkbox_block2" class="checkbox" onclick="checkBoxChecked('checkbox2'); checkBoxToggle(admin, 'admin_state', 'admin_price', '500')"><p id="checkbox_title2" class="checkbox_title">Админ-панель</p><img src="{{ url_for('static', filename='images/Check-box-diactive.svg')}}" alt="" id="checkbox2" class=""></span>
+                    <span id="checkbox_block3" class="checkbox" onclick="checkBoxChecked('checkbox3'); checkBoxToggle(jsFunc, 'jsFunc_state', 'jsFunc_price', '500')"><p id="checkbox_title3" class="checkbox_title">JS-функции</p><img src="{{ url_for('static', filename='images/Check-box-diactive.svg')}}" alt="" id="checkbox3" class=""></span>
+                </div>
+                <div class="card">
+                    <h2>Дизайн</h2>
+                    <span id="checkbox_block4" class="checkbox" onclick="checkBoxChecked('checkbox4'); checkBoxToggle(adaptive, 'adaptive_state', 'adaptive_price', '500')">Адаптив<img src="{{ url_for('static', filename='images/Check-box-diactive.svg')}}" alt="" id="checkbox4" class=""></span>
+                    <span class="checkbox" onclick="checkBoxChecked('checkbox5'); checkBoxToggle(edit, 'edit_state', 'edit_price', '500')">Правки<img src="{{ url_for('static', filename='images/Check-box-diactive.svg')}}" alt="" id="checkbox5" class=""></span>
+                    <input type="text" class="input_text_card" id="inputdisign" placeholder="Ссылка на Figma">
+                </div>
+                <div class="card">
+                    <h2>Контакты</h2>
+                    <input type="tel" class="input_text_card" placeholder="Номер">
+                    <div class="imp_img_cont"><input type="email" class="input_text_card" placeholder="Эл.Почта"><img src="img/Star%201.svg" alt="" class="imp_img"></div>
+                    <div class="imp_img_cont"><input type="tg" class="input_text_card" placeholder="Телеграм"><img src="img/Star%201.svg" alt="" class="imp_img"></div>
+                    </div>
+                <textarea class="comment" placeholder="Комментарий" cols="30" rows="10"></textarea>
+                </div>
+            <div class="check">
+                <h3>Чек</h3>
+                <ul id="check_list">
+
+                </ul>
+                <h1>Итого : ~<span id="sum">0</span>р.</h1>
+                <h4>Цена приблизительная, точная сумма будет названа после оценки шаблона</h4>
+            </div>
+        </main>
+        <div class="send_button hidden" id="send_button">
+            <button id="send" class="hidden">Отправить</button>
+            <span class="hidden"><img src="{{ url_for('static', filename='images/Info Square.svg')}}" alt="">Что бы отправить заявку, авторизуйтесь на сайте</span>
+        </div>
+        <footer class="hidden" id="footer">
+            <ul class="footer_menu">
+                <li>CosmoHelper™</li>
+                <li>
+                    <ul id="socials">
+                        <li><a href="#"><img src="{{ url_for('static', filename='images/messenger.svg')}}" alt=""></a></li>
+                        <li><a href="#"><img src="{{ url_for('static', filename='images/github.svg')}}" alt=""></a></li>
+                        <li><a href="#"><img src="{{ url_for('static', filename='images/telegram.svg')}}" alt=""></a></li>
+                    </ul>
+                </li>
+                <li><a href="">Privacy Police</a></a></li>
+                <li><a href="">Contacts</a></a></li>
+            </ul>
+        </footer>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js')}}"></script>
+</body>
+</html>
